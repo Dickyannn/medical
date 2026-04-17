@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Form Selector</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="padding:20px;">
+  <h2>Test Form Selector</h2>
+  
+  <div class="card mb-3">
+    <div class="card-body">
+      <form id="employee-form">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Nama Karyawan</label>
+            <input class="form-input" id="employee-name" name="employee_name" value="Test User" placeholder="Nama lengkap" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">NIK Karyawan</label>
+            <input class="form-input" id="employee-nik" name="nik_employee" value="12345" placeholder="Nomor induk karyawan" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departemen</label>
+            <select class="form-input" id="employee-department" name="department" required>
+              <option value="">-- Pilih Departemen --</option>
+              <option value="Engineering" selected>Engineering</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Finance">Finance</option>
+              <option value="HR">HR</option>
+              <option value="Operations">Operations</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Hubungan</label>
+            <select class="form-input" id="employee-relation" name="relation_type" required>
+              <option value="">-- Pilih Hubungan --</option>
+              <option value="Karyawan sendiri" selected>Karyawan sendiri</option>
+              <option value="Suami/Istri">Suami/Istri</option>
+              <option value="Anak">Anak</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" onclick="testFormValues()">Test Get Values</button>
+  
+  <div id="results" style="margin-top:20px;"></div>
+
+  <script>
+    function testFormValues() {
+      const employeeName = document.getElementById('employee-name')?.value?.trim();
+      const nikEmployee = document.getElementById('employee-nik')?.value?.trim();
+      const department = document.getElementById('employee-department')?.value;
+      const relationType = document.getElementById('employee-relation')?.value;
+      
+      const results = document.getElementById('results');
+      results.innerHTML = `
+        <div class="card">
+          <div class="card-body">
+            <h3>Form Values:</h3>
+            <ul>
+              <li><strong>Nama:</strong> ${employeeName || '(empty)'}</li>
+              <li><strong>NIK:</strong> ${nikEmployee || '(empty)'}</li>
+              <li><strong>Departemen:</strong> ${department || '(empty)'}</li>
+              <li><strong>Hubungan:</strong> ${relationType || '(empty)'}</li>
+            </ul>
+            <p style="color:${employeeName && nikEmployee && department && relationType ? 'green' : 'red'}">
+              ${employeeName && nikEmployee && department && relationType ? '✓ All fields filled' : '✗ Some fields empty'}
+            </p>
+          </div>
+        </div>
+      `;
+      
+      console.log('Form values:', { employeeName, nikEmployee, department, relationType });
+    }
+  </script>
+</body>
+</html>

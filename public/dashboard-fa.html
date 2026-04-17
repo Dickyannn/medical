@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedClaim — F&A Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- APP SHELL -->
+<div id="page-app" class="active">
+  <div class="topbar">
+    <div class="topbar-brand">MedClaim</div>
+    <div class="topbar-sep"></div>
+    <span class="topbar-role" id="role-badge">F&A</span>
+    <nav class="topbar-nav" id="topbar-nav"></nav>
+    <div class="topbar-right">
+      <div class="user-chip">
+        <div class="user-avatar" id="user-avatar">BS</div>
+        <span id="user-name" style="font-size:0.84rem;color:var(--text-2)">Budi Santoso</span>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Keluar</button>
+    </div>
+  </div>
+
+  <div id="app-content"></div>
+</div>
+
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+<script>
+  function initDashboard() {
+    const role = localStorage.getItem('medclaim_role');
+    if (!role || role !== 'fa') {
+      window.location.href = '/login.html';
+    } else {
+      if (typeof initializeApp === 'function') {
+        initializeApp(role);
+      }
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDashboard);
+  } else {
+    initDashboard();
+  }
+</script>
+</body>
+</html>

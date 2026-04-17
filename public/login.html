@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedClaim — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="page-login">
+  <div class="login-left">
+    <div class="login-brand">
+      <div class="login-brand-name">MedClaim</div>
+      <div class="login-brand-tag">Medical Management System</div>
+    </div>
+    <div class="login-hero">
+      <h2>Kelola klaim medis<br>lebih teratur.</h2>
+      <p>Otomasi ekstraksi dokumen, verifikasi duplikat, dan alur approval dalam satu platform terintegrasi.</p>
+    </div>
+  </div>
+
+  <div class="login-right">
+    <div class="login-box animate-in">
+      <h3>Masuk ke akun Anda</h3>
+      <p>Sistem manajemen klaim medis karyawan</p>
+
+      <div class="form-group">
+        <label class="form-label">Email / Username</label>
+        <input class="form-input" type="text" id="login-email" placeholder="email@perusahaan.id">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" id="login-pass" placeholder="••••••••">
+      </div>
+      <button class="btn btn-primary" onclick="doLogin()">Masuk →</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/auth.js"></script>
+</body>
+</html>

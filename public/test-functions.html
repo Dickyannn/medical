@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Functions</title>
+</head>
+<body>
+  <h1>Testing JavaScript Functions</h1>
+  <div id="results"></div>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    const results = document.getElementById('results');
+    const functions = [
+      'renderGAUpload',
+      'renderGAHistory',
+      'renderGAStamp',
+      'renderRVQueue',
+      'renderRVHistory',
+      'renderFAReport',
+      'renderFASummary',
+      'initializeApp',
+      'switchTab',
+      'buildNav'
+    ];
+
+    let html = '<ul>';
+    functions.forEach(fn => {
+      const exists = typeof window[fn] === 'function';
+      html += `<li style="color:${exists ? 'green' : 'red'}">${fn}: ${exists ? '✓ Defined' : '✗ Not Defined'}</li>`;
+    });
+    html += '</ul>';
+    results.innerHTML = html;
+
+    console.log('All functions check:', functions.map(fn => `${fn}: ${typeof window[fn]}`));
+  </script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Upload</title>
+</head>
+<body>
+    <h1>Test Upload API</h1>
+    
+    <form id="uploadForm">
+        <div>
+            <label>Nama Karyawan:</label>
+            <input type="text" id="employee_name" value="Test User" required>
+        </div>
+        <div>
+            <label>NIK:</label>
+            <input type="text" id="nik_employee" value="12345" required>
+        </div>
+        <div>
+            <label>Departemen:</label>
+            <select id="department" required>
+                <option value="Engineering">Engineering</option>
+                <option value="Marketing">Marketing</option>
+            </select>
+        </div>
+        <div>
+            <label>Hubungan:</label>
+            <select id="relation_type" required>
+                <option value="self">Karyawan sendiri</option>
+                <option value="spouse">Suami/Istri</option>
+            </select>
+        </div>
+        <div>
+            <label>Kwitansi File:</label>
+            <input type="file" id="kwitansi_file" accept=".pdf,.jpg,.jpeg,.png" required>
+        </div>
+        <div>
+            <label>Surat File:</label>
+            <input type="file" id="surat_file" accept=".pdf,.jpg,.jpeg,.png" required>
+        </div>
+        <button type="submit">Upload</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData();
+            formData.append('employee_name', document.getElementById('employee_name').value);
+            formData.append('nik_employee', document.getElementById('nik_employee').value);
+            formData.append('department', document.getElementById('department').value);
+            formData.append('relation_type', document.getElementById('relation_type').value);
+            formData.append('kwitansi_file', document.getElementById('kwitansi_file').files[0]);
+            formData.append('surat_file', document.getElementById('surat_file').files[0]);
+            
+            console.log('Sending request...');
+            
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/submissions', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                
+                console.log('Response status:', response.status);
+                
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    console.log('Response data:', data);
+                    document.getElementById('result').innerHTML = `
+                        <h3>Response:</h3>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+                } else {
+                    const text = await response.text();
+                    console.error('Non-JSON response:', text);
+                    document.getElementById('result').innerHTML = `
+                        <h3>Error:</h3>
+                        <pre>${text.substring(0, 1000)}</pre>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `
+                    <h3>Error:</h3>
+                    <p>${error.message}</p>
+                `;
+            }
+        });
+    </script>
+</body>
+</html>

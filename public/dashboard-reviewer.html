@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MedClaim — Reviewer Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- APP SHELL -->
+<div id="page-app" class="active">
+  <div class="topbar">
+    <div class="topbar-brand">MedClaim</div>
+    <div class="topbar-sep"></div>
+    <span class="topbar-role" id="role-badge">Reviewer</span>
+    <nav class="topbar-nav" id="topbar-nav"></nav>
+    <div class="topbar-right">
+      <div class="user-chip">
+        <div class="user-avatar" id="user-avatar">SR</div>
+        <span id="user-name" style="font-size:0.84rem;color:var(--text-2)">Siti Rahayu</span>
+      </div>
+      <button class="logout-btn" onclick="doLogout()">Keluar</button>
+    </div>
+  </div>
+
+  <div id="app-content"></div>
+</div>
+
+<!-- MODAL REJECT -->
+<div class="modal-overlay" id="modal-reject">
+  <div class="modal-box">
+    <div class="modal-header">Tolak Pengajuan</div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Alasan Penolakan</label>
+        <textarea class="form-input" id="reject-reason" style="min-height:100px;font-family:var(--font);font-size:0.9rem;resize:vertical" placeholder="Jelaskan alasan penolakan..."></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-reject')">Batal</button>
+      <button class="btn btn-danger" onclick="doReject()">✗ Tolak</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL APPROVE -->
+<div class="modal-overlay" id="modal-approve">
+  <div class="modal-box">
+    <div class="modal-header">Setujui Pengajuan</div>
+    <div class="modal-body">
+      Apakah Anda yakin ingin menyetujui pengajuan ini? GA akan mendapat notifikasi untuk memberi stempel dan mengirim ke F&A.
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('modal-approve')">Batal</button>
+      <button class="btn btn-success" onclick="doApprove()">✓ Setujui</button>
+    </div>
+  </div>
+</div>
+
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+<script>
+  function initDashboard() {
+    const role = localStorage.getItem('medclaim_role');
+    if (!role || role !== 'reviewer') {
+      window.location.href = '/login.html';
+    } else {
+      if (typeof initializeApp === 'function') {
+        initializeApp(role);
+      }
+    }
+  }
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDashboard);
+  } else {
+    initDashboard();
+  }
+</script>
+</body>
+</html>
