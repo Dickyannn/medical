@@ -142,7 +142,7 @@ Gemini bisa baca berbagai format:
 ### 1. API Key Sudah Ditambahkan
 File `.env`:
 ```env
-GEMINI_API_KEY=AIzaSyB-H5Dx2fqxLcSQKnhg6gstsQFSpHNl_ms
+GEMINI_API_KEY=...
 ```
 
 ### 2. Code Sudah Diupdate
@@ -209,7 +209,7 @@ All fields should be populated:
 **Cek 1: API Key valid?**
 ```bash
 # Test API key
-curl "https://generativelanguage.googleapis.com/v1beta/models?key=AIzaSyB-H5Dx2fqxLcSQKnhg6gstsQFSpHNl_ms"
+curl "..."
 ```
 
 **Cek 2: Gemini API error?**
